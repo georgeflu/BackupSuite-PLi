@@ -307,7 +307,7 @@ if [ $SEARCH = "dm900" -o $SEARCH = "dm920" ] ; then
 	dd if=/dev/mmcblk0p1 of=$WORKDIR/$KERNELNAME
 	log "Kernel resides on /dev/mmcblk0p1" 
 else
-	python $LIBDIR/enigma2/python/Plugins/Extensions/BackupSuite/findkerneldevice.pyo
+	python $LIBDIR/enigma2/python/Plugins/Extensions/BackupSuite/findkerneldevice.py
 	KERNEL=`cat /sys/firmware/devicetree/base/chosen/kerneldev`
 	KERNELNAME=${KERNEL:11:7}.bin
 	echo "$KERNELNAME = STARTUP_${KERNEL:17:1}"
