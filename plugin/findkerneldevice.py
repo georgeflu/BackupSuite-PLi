@@ -53,9 +53,9 @@ def read_header(fp, lba_size=512):
 	fmt, GPTHeader = _make_fmt('GPTHeader', GPT_HEADER_FORMAT)
 	data = fp.read(struct.calcsize(fmt))
 	header = GPTHeader._make(struct.unpack(fmt, data))
-	if header.signature != 'EFI PART':
+	if header.signature != b'EFI PART':
 		raise GPTError('Bad signature: %r' % header.signature)
-	if header.revision != '\x00\x00\x01\x00':
+	if header.revision != b'\x00\x00\x01\x00':
 		raise GPTError('Bad revision: %r' % header.revision)
 	if header.header_size < 92:
 		raise GPTError('Bad header size: %r' % header.header_size)
@@ -104,8 +104,8 @@ def find_kernel_device_gpt(kernelpartition):
 		pass
 	try:
 		p = 1
-		header = read_header(open(device, 'r'))
-		for part in read_partitions(open(device, 'r'), header):
+		header = read_header(open(device, 'rb'))
+		for part in read_partitions(open(device, 'rb'), header):
 			if kernelpartition == part.name:
 				return device + 'p' + str(p)
 			p += 1
