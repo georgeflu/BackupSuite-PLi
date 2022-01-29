@@ -386,7 +386,7 @@ else
 		log "Kernel resides on $KERNEL"
 		dd if=/dev/kernel of=$WORKDIR/$KERNELNAME > /dev/null 2>&1
 	else
-		python $LIBDIR/enigma2/python/Plugins/Extensions/BackupSuite/findkerneldevice.py
+		python $LIBDIR/enigma2/python/Plugins/Extensions/BackupSuite/findkerneldevice.pyc
 		KERNEL=`cat /sys/firmware/devicetree/base/chosen/kerneldev`
 		KERNELNAME=${KERNEL:11:7}.bin
 		echo "$KERNELNAME = STARTUP_${KERNEL:17:1}"
