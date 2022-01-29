@@ -138,9 +138,9 @@ backup_made_nfi()
 {
 {
 echo $LINE
-$SHOW "message42" ; echo "$MAINDEST" 	# NFI Image created in: 
+$SHOW "message42" ; echo "$MAINDEST" 	# NFI Image created in:
 $SHOW "message23"		# "The content of the folder is:"
-ls "$MAINDEST" $LS2 | sed 's/-.........    1//' 
+ls "$MAINDEST" $LS2 | sed 's/-.........    1//'
 echo $LINE
 if  [ $HARDDISK != 1 ]; then
 	$SHOW "message11" ; echo "$EXTRA"		# and there is made an extra copy in:
@@ -213,7 +213,7 @@ if [ -f /etc/modules-load.d/dreambox-dvb-modules-dm*.conf ] || [ -f /etc/modules
 		log "Thanks GOD it's Open Vision"
 		SEARCH=$( cat /etc/openvision/model | tr "A-Z" "a-z" | tr -d '[:space:]' )
 	else
-		log "Not Open Vision, OpenPLi or SatDreamGr maybe?"	
+		log "Not Open Vision, OpenPLi or SatDreamGr maybe?"
 		SEARCH=$( cat /proc/stb/info/model | tr "A-Z" "a-z" | tr -d '[:space:]' )
 	fi
 else
@@ -278,7 +278,7 @@ ESTMINUTES=$(( $ESTTIMESEC/60 ))
 ESTSECONDS=$(( $ESTTIMESEC-(( 60*$ESTMINUTES ))))
 echo $LINE
 {
-$SHOW "message03"  ; printf "%d.%02d " $ESTMINUTES $ESTSECONDS ; $SHOW "message25" # estimated time in minutes 
+$SHOW "message03"  ; printf "%d.%02d " $ESTMINUTES $ESTSECONDS ; $SHOW "message25" # estimated time in minutes
 echo $LINE
 } 2>&1 | tee -a $LOGFILE
 #=================================================================================
@@ -305,7 +305,7 @@ log $LINE
 $SHOW "message07" 2>&1 | tee -a $LOGFILE			# Create: kerneldump
 if [ $SEARCH = "dm900" -o $SEARCH = "dm920" ] ; then
 	dd if=/dev/mmcblk0p1 of=$WORKDIR/$KERNELNAME
-	log "Kernel resides on /dev/mmcblk0p1" 
+	log "Kernel resides on /dev/mmcblk0p1"
 else
 	python $LIBDIR/enigma2/python/Plugins/Extensions/BackupSuite/findkerneldevice.pyc
 	KERNEL=`cat /sys/firmware/devicetree/base/chosen/kerneldev`
@@ -327,7 +327,7 @@ $BZIP2 $WORKDIR/rootfs.tar
 make_folders
 mv "$WORKDIR/$ROOTNAME" "$MAINDEST/$ROOTNAME"
 mv "$WORKDIR/$KERNELNAME" "$MAINDEST/$KERNELNAME"
-image_version > "$MAINDEST/imageversion" 
+image_version > "$MAINDEST/imageversion"
 if  [ $HARDDISK != 1 ]; then
 	mkdir -p "$EXTRA"
 	echo "Created directory  = $EXTRA" >> $LOGFILE
@@ -364,7 +364,7 @@ if  [ $HARDDISK = 1 ]; then						# looking for a valid usb-stick
 		echo "MADE AN EXTRA COPY IN: $TARGET" >> $LOGFILE
 		df -h "$TARGET"  >> $LOGFILE
 		$SHOW "message19" 2>&1 | tee -a $LOGFILE	# Backup finished and copied to your USB-flashdrive
-	else 
+	else
 		$SHOW "message40" >> $LOGFILE
 	fi
 sync
@@ -381,8 +381,8 @@ echo -n $YELLOW
 $SHOW "message24"  ; printf "%d.%02d " $MINUTES $SECONDS ; $SHOW "message25"
 } 2>&1 | tee -a $LOGFILE
 if [ $VISIONVERSION == "7" ]; then
-	ROOTSIZE=`ls "$MAINDEST" -e1S | grep $ROOTNAME | awk {'print $3'} ` 
-	KERNELSIZE=`ls "$MAINDEST" -e1S | grep $KERNELNAME | awk {'print $3'} ` 
+	ROOTSIZE=`ls "$MAINDEST" -e1S | grep $ROOTNAME | awk {'print $3'} `
+	KERNELSIZE=`ls "$MAINDEST" -e1S | grep $KERNELNAME | awk {'print $3'} `
 else
 	ROOTSIZE=`ls "$MAINDEST" -lS | grep $ROOTNAME | awk {'print $5'} `
 	KERNELSIZE=`ls "$MAINDEST" -lS | grep $KERNELNAME | awk {'print $5'} `
@@ -391,7 +391,7 @@ TOTALSIZE=$((($ROOTSIZE+$KERNELSIZE)/1024))
 SPEED=$(( $TOTALSIZE/$DIFF ))
 echo $SPEED > $LIBDIR/enigma2/python/Plugins/Extensions/BackupSuite/speed.txt
 echo $LINE >> $LOGFILE
-# "Back up done with $SPEED KB per second" 
+# "Back up done with $SPEED KB per second"
 {
 $SHOW "message26" ; echo -n "$SPEED" ; $SHOW "message27"
 } 2>&1 | tee -a $LOGFILE
@@ -431,7 +431,7 @@ log $LINE
 ############# START TO SHOW SOME INFORMATION ABOUT BRAND & MODEL ##############
 echo -n $PURPLE
 echo -n "$SEARCH " | tr  a-z A-Z		# Shows the receiver brand and model
-$SHOW "message02"  			# BACK-UP TOOL FOR MAKING A COMPLETE BACK-UP 
+$SHOW "message02"  			# BACK-UP TOOL FOR MAKING A COMPLETE BACK-UP
 echo $BLUE
 log "RECEIVER = $SEARCH "
 echo "$VERSION"
@@ -453,7 +453,7 @@ ESTMINUTES=$(( $ESTTIMESEC/60 ))
 ESTSECONDS=$(( $ESTTIMESEC-(( 60*$ESTMINUTES ))))
 echo $LINE
 {
-$SHOW "message03"  ; printf "%d.%02d " $ESTMINUTES $ESTSECONDS ; $SHOW "message25" # estimated time in minutes 
+$SHOW "message03"  ; printf "%d.%02d " $ESTMINUTES $ESTSECONDS ; $SHOW "message25" # estimated time in minutes
 echo $LINE
 } 2>&1 | tee -a $LOGFILE
 #=================================================================================
@@ -469,10 +469,10 @@ mkdir -p /tmp/bi/root # this is where the complete content will be available
 log "Create directory   = /tmp/bi/root"
 sync
 mount --bind / /tmp/bi/root # the complete root at /tmp/bi/root
-## TEMPORARY WORKAROUND TO REMOVE 
+## TEMPORARY WORKAROUND TO REMOVE
 ##      /var/lib/samba/private/msg.sock
 ## WHICH GIVES AN ERRORMESSAGE WHEN NOT REMOVED
-if [ -d /tmp/bi/root/var/lib/samba/private/msg.sock ] ; then 
+if [ -d /tmp/bi/root/var/lib/samba/private/msg.sock ] ; then
 	rm -rf /tmp/bi/root/var/lib/samba/private/msg.sock
 fi
 #############################  MAKING ROOT.UBI(FS) ############################
@@ -485,7 +485,7 @@ else
 fi
 ############################ ASSEMBLING THE IMAGE #############################
 make_folders
-image_version > "$MAINDEST/imageversion" 
+image_version > "$MAINDEST/imageversion"
 if  [ $HARDDISK != 1 ]; then
 	mkdir -p "$EXTRA"
 	echo "Created directory  = $EXTRA" >> $LOGFILE
@@ -500,7 +500,7 @@ if  [ $HARDDISK = 1 ]; then						# looking for a valid usb-stick
 	do
 		if [ -f "${candidate}/"*[Bb][Aa][Cc][Kk][Uu][Pp][Ss][Tt][Ii][Cc][Kk]* ] ; then
 			TARGET="${candidate}"
-		fi    
+		fi
 	done
 	if [ "$TARGET" != "XX" ] ; then
 		echo -n $GREEN
@@ -586,7 +586,7 @@ echo -n $WHITE
 ############# START TO SHOW SOME INFORMATION ABOUT BRAND & MODEL ##############
 echo -n $PURPLE
 echo -n "$SEARCH " | tr  a-z A-Z		# Shows the receiver brand and model
-$SHOW "message02"  			# BACK-UP TOOL FOR MAKING A COMPLETE BACK-UP 
+$SHOW "message02"  			# BACK-UP TOOL FOR MAKING A COMPLETE BACK-UP
 echo $BLUE
 log "RECEIVER = $SEARCH "
 echo "$VERSION"
@@ -598,7 +598,7 @@ IMAGENAME="$3"
 cleanup_mounts(){
    if [ ! -z "$TBI" ] ; then
       if [ -d "$TBI/boot" ] ; then
-	 if grep -q "$TBI/boot" /proc/mounts ; then 
+	 if grep -q "$TBI/boot" /proc/mounts ; then
 	    umount "$TBI/boot" 2>/dev/null || log "Cannot umount boot" && exit 6
 	 fi
 	 rmdir "$TBI/boot" 2>/dev/null
@@ -680,7 +680,7 @@ case $SEARCH in
       DREAMBOX_PART2_SIZE="0x3F800000"
       # dm7020hdv2 when writesize = 2048
       WRITESIZE="4096"
-      if [ -f /sys/devices/virtual/mtd/mtd0/writesize ] ; then 
+      if [ -f /sys/devices/virtual/mtd/mtd0/writesize ] ; then
 	 WRITESIZE=$(cat /sys/devices/virtual/mtd/mtd0/writesize)
       fi
       if [ $WRITESIZE = "2048" ] ; then
@@ -747,7 +747,7 @@ if cutoff:
     open('$SECSTAGE', 'wb').write(data[0:cutoff])
 "
 SIZE="$(du -k "$SECSTAGE" | awk '{ print $1 }')"
-if [ $SIZE -gt 200 ] ; then 
+if [ $SIZE -gt 200 ] ; then
    log "Error: Size of secondstage must be less than 200k"
    log "Reinstall secondstage before creating backup"
    log "opkg install --force-reinstall dreambox-secondstage-$SEARCH"

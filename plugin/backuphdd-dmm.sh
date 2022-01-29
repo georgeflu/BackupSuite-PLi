@@ -27,7 +27,7 @@ export SHOW="python $LIBDIR/enigma2/python/Plugins/Extensions/BackupSuite/messag
 export HARDDISK=1
 echo -n $YELLOW
 $SHOW "message20"   	#echo "Full back-up to the harddisk"
-FREESIZE_0=0				
+FREESIZE_0=0
 TOTALSIZE_0=0
 MEDIA=0
 MINIMUN=33				# avoid all sizes below 33GB
@@ -42,12 +42,12 @@ if [ "$UBIFS" = ubi0:rootfs ] ; then
 else
 	touch /hdd/hdd-check > /dev/null 2>&1
 fi
-if [ -f /hdd/hdd-check ] ; then  
+if [ -f /hdd/hdd-check ] ; then
 	CHECKMOUNT1="$(df -h /hdd | tail -n 1 | awk {'print $6'})"
 	CHECKMOUNT2="$(df -h /hdd | tail -n 1 | awk {'print $5'})"
 	if [ "${CHECKMOUNT1:1:5}" = media ] ; then
 		TOTALSIZE="$(df -h /hdd | tail -n 1 | awk {'print $2'})"
-		FREESIZE="$(df -h /hdd | tail -n 1 | awk {'print $4'})"	
+		FREESIZE="$(df -h /hdd | tail -n 1 | awk {'print $4'})"
 		MEDIA="$(df -h /hdd | tail -n 1 | awk {'print $6'})"
 	elif [ "${CHECKMOUNT2:1:5}" = media ] ; then
 		TOTALSIZE="$(df -h /hdd | tail -n 1 | awk {'print $1'})"
@@ -68,12 +68,12 @@ else
 	for candidate in /dev/sda1 /dev/sdb1 /dev/sdc1 /dev/sdd1 /dev/sde1 /dev/sdf1
 	do
 		if grep ${candidate} /proc/mounts > /dev/null ; then
-			DISK="$( grep ${candidate} /proc/mounts | awk {'print $3'})" 
-			MEDIA="$( grep -m1 ${candidate} /proc/mounts | awk {'print $2'})" 
+			DISK="$( grep ${candidate} /proc/mounts | awk {'print $3'})"
+			MEDIA="$( grep -m1 ${candidate} /proc/mounts | awk {'print $2'})"
 			CHECK=${DISK:0:3}
 			if [ $CHECK = "ext" ] ; then
-				TOTALSIZE="$(df -B 1073741824 ${candidate} | tail -n 1 | awk {'print $2'})" 
-				FREESIZE="$(df -B 1073741824 ${candidate} | tail -n 1 | awk {'print $4'})" 
+				TOTALSIZE="$(df -B 1073741824 ${candidate} | tail -n 1 | awk {'print $2'})"
+				FREESIZE="$(df -B 1073741824 ${candidate} | tail -n 1 | awk {'print $4'})"
 				if [ "$FREESIZE" -gt $FREESIZE_0 -a $TOTALSIZE -gt $MINIMUN ] ; then
 					BMEDIA=$MEDIA
 					TOTALSIZE_0=$TOTALSIZE
@@ -95,12 +95,12 @@ else
 		echo -n $WHITE
 		exit 0
 	else
-		TOTALSIZE_0="$(df -h $MEDIA | tail -n 1 | awk {'print $2'})"		
+		TOTALSIZE_0="$(df -h $MEDIA | tail -n 1 | awk {'print $2'})"
 		FREESIZE_0="$(df -h $MEDIA | tail -n 1 | awk {'print $4'})"
 		echo -n " -> $MEDIA ($TOTALSIZE_0, "; $SHOW "message16" ; echo -n "$FREESIZE_0)"
 		echo -n $WHITE
 		chmod 755 $LIBDIR/enigma2/python/Plugins/Extensions/BackupSuite/backupdmm.sh > /dev/null 2>&1
-		$LIBDIR/enigma2/python/Plugins/Extensions/BackupSuite/backupdmm.sh $MEDIA 
+		$LIBDIR/enigma2/python/Plugins/Extensions/BackupSuite/backupdmm.sh $MEDIA
 		echo "$HDD_MOUNT" > /tmp/BackupSuite.log
 		sync
 	fi
