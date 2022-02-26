@@ -30,10 +30,10 @@ USEDSIZE=`df -k /usr/ | grep [0-9]% | tr -s " " | cut -d " " -f 3` # size of roo
 NEEDEDSPACE=$(((4*$USEDSIZE)/1024))
 for candidate in `cut -d ' ' -f 2 /proc/mounts | grep '^/media/'`
 do
-	if [ -f "${candidate}/"*[Bb][Aa][Cc][Kk][Uu][Pp][Ss][Tt][Ii][Cc][Kk]* ] || [ -d "${candidate}/"*[Bb][Aa][Cc][Kk][Uu][Pp][Ss][Tt][Ii][Cc][Kk]* ] 
+	if [ -f "${candidate}/"*[Bb][Aa][Cc][Kk][Uu][Pp][Ss][Tt][Ii][Cc][Kk]* ] || [ -d "${candidate}/"*[Bb][Aa][Cc][Kk][Uu][Pp][Ss][Tt][Ii][Cc][Kk]* ]
 	then
 	TARGET="${candidate}"
-	fi 
+	fi
 done
 if [ "$TARGET" = "XX" ] ; then
 	echo -n $RED
@@ -41,7 +41,7 @@ if [ "$TARGET" = "XX" ] ; then
 	echo -n $WHITE
 else
 	echo -n $YELLOW
-	$SHOW "message22" 
+	$SHOW "message22"
 	SIZE_1="$(df -h "$TARGET" | tail -n 1 | awk {'print $(NF-2)'})"
 	SIZE_2="$(df -h "$TARGET" | tail -n 1 | awk {'print $(NF-4)'})"
 	echo -n " -> $TARGET ($SIZE_2, " ; $SHOW "message16" ; echo "$SIZE_1)"
@@ -57,6 +57,6 @@ else
 		exit 0
 	fi
 	chmod 755 $LIBDIR/enigma2/python/Plugins/Extensions/BackupSuite/backupdmm.sh > /dev/null 2>&1
-	$LIBDIR/enigma2/python/Plugins/Extensions/BackupSuite/backupdmm.sh "$TARGET" 
+	$LIBDIR/enigma2/python/Plugins/Extensions/BackupSuite/backupdmm.sh "$TARGET"
 	sync
 fi

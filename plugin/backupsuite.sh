@@ -203,7 +203,7 @@ else
 		log "Thanks GOD it's Open Vision"
 		SEARCH=$( cat /etc/openvision/model )
 	else
-		log "Not Open Vision, OpenPLi or SatDreamGr maybe?"	
+		log "Not Open Vision, OpenPLi or SatDreamGr maybe?"
 		if [ -f /proc/stb/info/hwmodel ] ; then
 			SEARCH=$( cat /proc/stb/info/hwmodel | tr "A-Z" "a-z" | tr -d '[:space:]' )
 		elif [ -f /proc/stb/info/gbmodel ] ; then
@@ -296,7 +296,7 @@ ESTMINUTES=$(( $ESTTIMESEC/60 ))
 ESTSECONDS=$(( $ESTTIMESEC-(( 60*$ESTMINUTES ))))
 echo $LINE
 {
-$SHOW "message03"  ; printf "%d.%02d " $ESTMINUTES $ESTSECONDS ; $SHOW "message25" # estimated time in minutes 
+$SHOW "message03"  ; printf "%d.%02d " $ESTMINUTES $ESTSECONDS ; $SHOW "message25" # estimated time in minutes
 echo $LINE
 } 2>&1 | tee -a $LOGFILE
 ####### WARNING IF THE IMAGESIZE OF THE XTRENDS GETS TOO BIG TO RESTORE ########

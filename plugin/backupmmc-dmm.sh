@@ -95,7 +95,7 @@ else
 		echo -n $WHITE
 		exit 0
 	else
-		TOTALSIZE_0="$(df -h $MEDIA | tail -n 1 | awk {'print $2'})"	
+		TOTALSIZE_0="$(df -h $MEDIA | tail -n 1 | awk {'print $2'})"
 		FREESIZE_0="$(df -h $MEDIA | tail -n 1 | awk {'print $4'})"
 		echo -n " -> $MEDIA ($TOTALSIZE_0, "; $SHOW "message16" ; echo -n "$FREESIZE_0)"
 		echo -n $WHITE
